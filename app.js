@@ -1,5 +1,5 @@
 let memoInfo = document.querySelectorAll('form.keyIn input');
-let btnInForm = document.querySelectorAll('form.keyIn button');
+let btn = document.querySelectorAll('form.keyIn button');
 let sort = document.querySelector('#sort');
 let todoList = document.querySelector('section.todoList');
 
@@ -37,8 +37,9 @@ function memoTemplate(text, date) {
         `
 }
 
-btnInForm.forEach(element => {
+btn.forEach(element => {
     element.addEventListener('click', (event) => {
+        let data = getData();
         event.preventDefault();
         if (element.id == 'today') {
             // today btn
@@ -53,7 +54,6 @@ btnInForm.forEach(element => {
             }
         } else if (element.id == 'add') {
             // add btn
-            let data = getData();
             let memo = [];
             memoInfo.forEach(element => memo.push(element.value));
             data.unshift(memo);
@@ -69,5 +69,12 @@ btnInForm.forEach(element => {
 
             todoList.innerHTML = html;
         }
+        // else if (element.id == 'sort') {
+        //     let html = '';
+        //     let min = 0;
+        //     data.forEach(element => {
+        //         element[1]
+        //     })
+        // }
     })
 })
