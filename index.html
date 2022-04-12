@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/571e65be0d.js" crossorigin="anonymous"></script>
+    <!-- 方便google搜尋到 -->
+    <meta name="robots" content="index, follow"/>
+    <meta name="description" content="一個可以記錄代辦事項的代辦清單" />
+    <meta name="author" content="Justin">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>My ToDo List</title>
+</head>
+<body>
+    <header>
+        <h1>My Todo List</h1>
+    </header>
+    <main>
+        <form class="keyIn">
+            <input type="text" name="memo" id="memo" required>
+            <input type="date" name="date" id="date" required>
+            <button id="today" title="today"><i class="fa-solid fa-calendar"></i></button>
+            <button id="nextDay" title="next day"><i class="fa-solid fa-calendar-plus"></i></button>
+            <button type="submit" id="add" title="add"><i class="fa-solid fa-plus"></i></button>
+            <button id="delete" title="delete"><i class="fa-solid fa-trash-can"></i></button>
+        </form>
+        <div class="sort">
+            <h2>Memo</h2>
+            <button id="sort">sort by time</button>
+        </div>
+        <section class="todoList">
+        </section>
+    </main>
+</body>
+<script src="./app.js"></script>
+</html>

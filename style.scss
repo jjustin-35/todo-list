@@ -1,0 +1,112 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
+    height: 100vh;
+}
+
+input, button{
+    border: none;
+}
+button{
+    cursor: pointer;
+}
+
+header{
+    height: 30vh;
+    @include center();
+    h1{
+        color: white;
+        font-size: 3rem;
+    }
+}
+main{
+    form{
+        height: 20vh;
+        @include center();
+        flex-wrap: wrap;
+        input, button{
+            border: none;
+            height: 3vw;
+            padding: 0.7rem 0.7rem;
+            margin: 0 0.1rem;
+        }
+        input{
+            &#memo{
+                width: 300px;
+            }
+        }
+        button{
+            color: white;
+            font-size: 1rem;
+            @include center();
+            &#today{
+                background-color: blue;
+            }
+            &#nextDay{
+                background-color: black;
+            }
+            &#add{
+                background-color: green;
+            }
+            &#delete{
+                background-color: red;
+            }
+        }
+    }
+    div.sort{
+        display: flex;
+        h2{
+            width: 50%;
+            text-align: end;
+            color: white;
+            font-size: 2rem;
+            margin: 0 1rem;
+        }
+        button{
+            border-radius: 15px;
+            background-color: white;
+            padding: 0.7rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    main{
+        form{
+            input, button{
+                height: 4vw;
+            }
+        }
+    }
+}
+@media screen and (max-width: 650px) {
+    main{
+        form{
+            input, button{
+                height: 5vw;
+            }
+        }
+    }
+}
+@media screen and (max-width: 550px) {
+    main{
+        form{
+            input, button{
+                height: 7vw;
+            }
+        }
+    }
+}

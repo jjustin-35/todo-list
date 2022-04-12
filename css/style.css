@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(217deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0) 70.71%), linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%), linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  height: 100vh;
+}
+
+input, button {
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  height: 30vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header h1 {
+  color: white;
+  font-size: 3rem;
+}
+
+main form {
+  height: 20vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+main form input, main form button {
+  border: none;
+  height: 3vw;
+  padding: 0.7rem 0.7rem;
+  margin: 0 0.1rem;
+}
+
+main form input#memo {
+  width: 300px;
+}
+
+main form button {
+  color: white;
+  font-size: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main form button#today {
+  background-color: blue;
+}
+
+main form button#nextDay {
+  background-color: black;
+}
+
+main form button#add {
+  background-color: green;
+}
+
+main form button#delete {
+  background-color: red;
+}
+
+main div.sort {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main div.sort h2 {
+  width: 50%;
+  text-align: end;
+  color: white;
+  font-size: 2rem;
+  margin: 0 1rem;
+}
+
+main div.sort button {
+  border-radius: 15px;
+  background-color: white;
+  padding: 0.7rem;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 1000px) {
+  main form input, main form button {
+    height: 4vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  main form input, main form button {
+    height: 5vw;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  main form input, main form button {
+    height: 7vw;
+  }
+}
+/*# sourceMappingURL=style.css.map */
