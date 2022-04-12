@@ -10,6 +10,21 @@ let date = new Date();
 let month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
 let today = [date.getFullYear(), month, date.getDate()]
 
+// get data from localStorage
+function getData() {
+    let data = JSON.parse(localStorage.getItem('todoList'));
+    // if there is no data
+    if (!data) {
+        data = [];
+    }
+    return data;
+}
+// save data
+function saveData(data) {
+    data = JSON.stringify(data);
+    localStorage.setItem('todoList', data);
+}
+
 btnInForm.forEach(element => {
     element.addEventListener('click', (event) => {
         event.preventDefault();
@@ -31,21 +46,9 @@ btnInForm.forEach(element => {
             memoInfo.forEach(element => memo.push(element.value));
             data.unshift(memo);
             saveData(data);
+
+            // render
+            
         }
     })
 })
-
-// get data from localStorage
-function getData() {
-    let data = JSON.parse(localStorage.getItem('todoList'));
-    // if there is no data
-    if (!data) {
-        data = [];
-    }
-    return data;
-}
-
-function saveData(data) {
-    data = JSON.stringify(data);
-    localStorage.setItem('todoList', data);
-}

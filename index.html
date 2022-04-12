@@ -21,16 +21,21 @@
         <form class="keyIn">
             <input type="text" name="memo" id="memo" required>
             <input type="date" name="date" id="date" required>
-            <button id="today" title="today"><i class="fa-solid fa-calendar"></i></button>
-            <button id="nextDay" title="next day"><i class="fa-solid fa-calendar-plus"></i></button>
-            <button type="submit" id="add" title="add"><i class="fa-solid fa-plus"></i></button>
-            <!-- <button id="delete" title="delete"><i class="fa-solid fa-trash-can"></i></button> -->
+            <button id="today" title="today" class="littleBtn"><i class="fa-solid fa-calendar"></i></button>
+            <button id="nextDay" title="next day" class="littleBtn"><i class="fa-solid fa-calendar-plus"></i></button>
+            <button type="submit" id="add" title="add" class="littleBtn"><i class="fa-solid fa-plus"></i></button>
         </form>
         <div class="sort">
             <h2>Memo</h2>
             <button id="sort">sort by time</button>
         </div>
         <section class="todoList">
+            <div>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <p>2022-04-12</p>
+                <button id="crossLine" title="finished" class="littleBtn"><i class="fa-solid fa-strikethrough"></i></button>
+                <button id="delete" title="delete" class="littleBtn"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
         </section>
     </main>
 </body>
