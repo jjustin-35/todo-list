@@ -90,6 +90,7 @@ main{
         flex-direction: column;
         div{
             display: flex;
+            margin: 0.2rem 0;
             p{
                 width: 350px;
                 background-color: white;
@@ -111,29 +112,17 @@ main{
 }
 
 @media screen and (max-width: 1000px) {
-    main{
-        form{
-            input, button{
-                height: 4vw;
-            }
-        }
+    p, input, button{
+        height: 4vw;
     }
 }
 @media screen and (max-width: 650px) {
-    main{
-        form{
-            input, button{
-                height: 5vw;
+    p, input, button{
+        height: 5vw;
             }
-        }
-    }
 }
 @media screen and (max-width: 550px) {
-    main{
-        form{
-            input, button{
-                height: 7vw;
-            }
-        }
+    p, input, button{
+        height: 7vw;
     }
 }

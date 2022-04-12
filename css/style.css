@@ -134,6 +134,7 @@ main section.todoList div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0.2rem 0;
 }
 
 main section.todoList div p {
@@ -155,19 +156,19 @@ main section.todoList div button#crossLine {
 }
 
 @media screen and (max-width: 1000px) {
-  main form input, main form button {
+  p, input, button {
     height: 4vw;
   }
 }
 
 @media screen and (max-width: 650px) {
-  main form input, main form button {
+  p, input, button {
     height: 5vw;
   }
 }
 
 @media screen and (max-width: 550px) {
-  main form input, main form button {
+  p, input, button {
     height: 7vw;
   }
 }

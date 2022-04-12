@@ -25,6 +25,18 @@ function saveData(data) {
     localStorage.setItem('todoList', data);
 }
 
+// memo template
+function memoTemplate(text, date) {
+    return `
+        <div>
+            <p>${text}</p>
+            <p>${date}</p>
+            <button id="crossLine" title="finished" class="littleBtn"><i class="fa-solid fa-strikethrough"></i></button>
+            <button id="delete" title="delete" class="littleBtn"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+        `
+}
+
 btnInForm.forEach(element => {
     element.addEventListener('click', (event) => {
         event.preventDefault();
@@ -48,7 +60,14 @@ btnInForm.forEach(element => {
             saveData(data);
 
             // render
-            
+            // get data again
+            data = getData();
+            let html = '';
+            data.forEach(element => {
+                html += memoTemplate(element[0], element[1]);
+            })
+
+            todoList.innerHTML = html;
         }
     })
 })
