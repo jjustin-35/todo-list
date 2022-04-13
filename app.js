@@ -1,6 +1,5 @@
-let memoInfo = document.querySelectorAll('form.keyIn input');
-let btn = document.querySelectorAll('form.keyIn button');
-let sort = document.querySelector('#sort');
+let input = document.querySelectorAll('form.keyIn input');
+let btn = document.querySelectorAll('button');
 let todoList = document.querySelector('section.todoList');
 
 localStorage.clear()
@@ -25,56 +24,67 @@ function saveData(data) {
     localStorage.setItem('todoList', data);
 }
 
-// memo template
-function memoTemplate(text, date) {
-    return `
-        <div>
-            <p>${text}</p>
-            <p>${date}</p>
-            <button id="crossLine" title="finished" class="littleBtn"><i class="fa-solid fa-strikethrough"></i></button>
-            <button id="delete" title="delete" class="littleBtn"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-        `
-}
 
 btn.forEach(element => {
     element.addEventListener('click', (event) => {
         let data = getData();
+        // let div = todoList.children;
         event.preventDefault();
         if (element.id == 'today') {
             // today btn
-            memoInfo[1].value = today.join('-');
+            input[1].value = today.join('-');
         } else if (element.id == 'nextDay') {
             // next day btn
-            if (memoInfo[1].value != '') {
+            if (input[1].value != '') {
                 today[2]++;
-                memoInfo[1].value = today.join('-');
+                input[1].value = today.join('-');
             } else {
                 alert('請先輸入一個日期。');
             }
         } else if (element.id == 'add') {
             // add btn
             let memo = [];
-            memoInfo.forEach(element => memo.push(element.value));
+            input.forEach(element => memo.push(element.value));
             data.unshift(memo);
             saveData(data);
 
             // render
-            // get data again
-            data = getData();
-            let html = '';
-            data.forEach(element => {
-                html += memoTemplate(element[0], element[1]);
+            let newMemo = document.createElement('div');
+            let p = document.createElement('p');
+            p.innerHTML = memo[0];
+            let time = document.createComment('p');
+            time.innerHTML = memo[1];
+            newMemo.classList.add('show');
+            newMemo.appendChild(p);
+            newMemo.appendChild(time);
+
+            // finish
+            let finishBtn = document.createElement('button');
+            finishBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+            finishBtn.classList.add('littleBtn')
+            finishBtn.classList.add('finish');
+            finishBtn.addEventListener('click', e => {
+                let div = e.target.parentElement;
+                div.classList.toggle('done');
             })
 
-            todoList.innerHTML = html;
+            // Delete
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+            deleteBtn.classList.add('littleBtn');
+            deleteBtn.classList.add('delete');
+            deleteBtn.addEventListener('click', e => {
+                let div = e.target.parentElement;
+                div.classList.add('disappear');
+
+                div.addEventListener('animationend', () => {
+                    div.remove();
+                })
+            })
+
+            newMemo.appendChild(finishBtn);
+            newMemo.appendChild(deleteBtn);
+            todoList.appendChild(newMemo);
         }
-        // else if (element.id == 'sort') {
-        //     let html = '';
-        //     let min = 0;
-        //     data.forEach(element => {
-        //         element[1]
-        //     })
-        // }
     })
 })

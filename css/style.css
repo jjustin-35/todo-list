@@ -27,20 +27,30 @@ button {
 
 button.littleBtn {
   height: 3vw;
-  width: 3vw;
-  padding: 0.7rem 0.7rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.3rem;
   margin: 0 0.1rem;
   color: white;
-  font-size: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+}
+
+i {
+  pointer-events: none;
+}
+
+.done {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.2rem;
+  opacity: 50%;
+}
+
+.show {
+  -webkit-animation: scale 0.3s ease forwards;
+          animation: scale 0.3s ease forwards;
+}
+
+.disappear {
+  -webkit-animation: disappear 0.3s ease forwards;
+          animation: disappear 0.3s ease forwards;
 }
 
 header {
@@ -147,29 +157,73 @@ main section.todoList div p:nth-child(2) {
   width: auto;
 }
 
-main section.todoList div button#delete {
+main section.todoList div button.delete {
   background-color: red;
 }
 
-main section.todoList div button#crossLine {
+main section.todoList div button.finish {
   background-color: darkgray;
 }
 
 @media screen and (max-width: 1000px) {
-  p, input, button {
+  p, input, button.littleBtn {
     height: 4vw;
   }
 }
 
 @media screen and (max-width: 650px) {
-  p, input, button {
+  p, input, button.littleBtn {
     height: 5vw;
   }
 }
 
 @media screen and (max-width: 550px) {
-  p, input, button {
+  p, input, button.littleBtn {
     height: 7vw;
+  }
+}
+
+@-webkit-keyframes scale {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes scale {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes disappear {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes disappear {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
   }
 }
 /*# sourceMappingURL=style.css.map */
