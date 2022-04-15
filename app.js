@@ -1,11 +1,10 @@
 let input = document.querySelectorAll('form.keyIn input');
 let btn = document.querySelectorAll('button');
-let todoList = document.querySelector('section.todoList');
 
 // get today
 let date = new Date();
 let month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
-let today = [date.getFullYear(), month, date.getDate()]
+let today = [date.getFullYear(), month, date.getDate()];
 
 // get data from localStorage
 function getData() {
@@ -22,16 +21,15 @@ function saveData(data) {
     localStorage.setItem('todoList', data);
 }
 
-// get data
-let data = getData();
-
 // render the memo
 function renderMemo(memo) {
+    let todoList = document.querySelector('section.todoList');
     let newMemo = document.createElement('div');
     let text = document.createElement('p');
-    text.innerHTML = memo[0];
+    text.innerHTML = memo.text;
     let time = document.createElement('p');
-    time.innerHTML = memo[1];
+    time.innerHTML = memo.time;
+    time.id = 'time';
     newMemo.classList.add('show');
     newMemo.appendChild(text);
     newMemo.appendChild(time);
@@ -58,7 +56,7 @@ function renderMemo(memo) {
             let text = div.children[0].innerText;
             let time = div.children[1].innerText;
             data.forEach((element, i) => {
-                if (element[0] == text && element[1] == time) {
+                if (element.text == text && element.time == time) {
                     data.splice(i, 1);
                     saveData(data);
                 }
@@ -71,6 +69,47 @@ function renderMemo(memo) {
     newMemo.appendChild(deleteBtn);
     todoList.appendChild(newMemo);
 }
+
+// use the merge sort in sort btn
+function mergeTime(arr1, arr2) {
+    let i = 0;
+    let j = 0;
+    let result = [];
+
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i].ms <= arr2[j].ms) {
+            result.push(arr1[i]);
+            i++;
+        }else if (arr2[j].ms <= arr1[i].ms) {
+            result.push(arr2[j]);
+            j++;
+        }
+    }
+    while (i < arr1.length) {
+        result.push(arr1[i]);
+        i++;
+    }
+    while (j < arr2.length) {
+        result.push(arr2[j]);
+        j++;
+    }
+
+    return result;
+}
+function mergeSort(arr) {
+    if (arr.length == 1) {
+        return arr;
+    } else {
+        let middle = Math.floor(arr.length / 2);
+        let left = arr.slice(0, middle);
+        let right = arr.slice(middle, arr.length);
+
+        return mergeTime(mergeSort(left), mergeSort(right))
+    }
+}
+
+// get data firstime
+let data = getData();
 
 data.forEach(element => {
     renderMemo(element);
@@ -87,23 +126,43 @@ btn.forEach(element => {
         } else if (element.id == 'nextDay') {
             // next day btn
             if (input[1].value != '') {
-                today[2]++;
-                input[1].value = today.join('-');
+                let date = new Date(input[1].value);
+                let year = date.getFullYear();
+                let month = date.getMonth();
+                let datetime = date.getDate();
+
+                let lastDate = new Date(year, month+1, 0);
+                if (datetime < lastDate.getDate()) {
+                    datetime++;
+                } else if (month < 11) {
+                    datetime = 1;
+                    month++;
+                } else {
+                    datetime = 1;
+                    month = 0;
+                    year++;
+                }
+                month = (month + 1) < 10 ? `0${month + 1}` : month + 1;
+                datetime = datetime < 10 ? `0${datetime}` : datetime;
+
+                let dateArray = [year, month, datetime]
+                
+                input[1].value = dateArray.join('-');
             } else {
                 alert('請先輸入一個日期。');
             }
         } else if (element.id == 'add') {
             // add btn
-            let memo = [];
-            input.forEach(element => {
-                memo.push(element.value);
-                element.value = '';
-            });
-            
-            if (memo[0] == '') {
+            let memo = {
+                text: input[0].value,
+                time: input[1].value,
+                ms: new Date(input[1].value).getTime(),
+            };
+
+            if (memo.text == '') {
                 alert('請輸入內容。');
                 return;
-            } else if (memo[1] == '') {
+            } else if (memo.time == '') {
                 alert('請輸入時間。');
                 return;
             }
@@ -114,9 +173,17 @@ btn.forEach(element => {
 
             // render
             renderMemo(memo);
+
+            input[0].value = '';
+            input[1].value = '';
         } else if (element.id == 'sort') {
-            
+            let div = document.querySelectorAll('.todoList div');
+            div.forEach(element => element.remove());
+
+            data = mergeSort(data);
+            data.forEach(element => renderMemo(element));
+
+            saveData(data);
         }
     })
 })
-
