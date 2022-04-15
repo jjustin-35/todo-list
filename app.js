@@ -26,10 +26,25 @@ function renderMemo(memo) {
     let todoList = document.querySelector('section.todoList');
     let newMemo = document.createElement('div');
     let text = document.createElement('p');
-    text.innerHTML = memo.text;
     let time = document.createElement('p');
-    time.innerHTML = memo.time;
-    time.id = 'time';
+
+    // judge the mission is done or not.
+    if (memo.finish) {
+        newMemo.classList.add('done');
+    }
+
+    // judge the time is epiring or not
+    let thisDay = new Date(today.join('-'));
+    let anotherDay = new Date(memo.time);
+    if (anotherDay < thisDay) {
+        text.innerHTML += '<i class="fa-solid fa-circle-exclamation" title="time expired"></i>';
+        text.style.background = 'yellow';
+        time.style.background = 'yellow';
+    }
+
+    text.innerHTML += memo.text;
+    time.innerHTML += memo.time;
+
     newMemo.classList.add('show');
     newMemo.appendChild(text);
     newMemo.appendChild(time);
@@ -42,6 +57,14 @@ function renderMemo(memo) {
     finishBtn.addEventListener('click', e => {
         let div = e.target.parentElement;
         div.classList.toggle('done');
+
+        if (!memo.finish) {
+            memo.finish = true;
+        } else {
+            memo.finish = false;
+        }
+
+        saveData(data);
     })
 
     // Delete
@@ -157,6 +180,7 @@ btn.forEach(element => {
                 text: input[0].value,
                 time: input[1].value,
                 ms: new Date(input[1].value).getTime(),
+                finish: false,
             };
 
             if (memo.text == '') {
